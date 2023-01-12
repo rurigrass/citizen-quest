@@ -5,13 +5,35 @@ import ToggleColorMode from '../components/ToggleColorMode';
 import ToggleLanguage from '../components/ToggleLanguage';
 import en from '../content/en';
 import es from '../content/es';
+import { createClient } from '@supabase/supabase-js';
+import { Question } from '../typings';
 
-export default function Home() {
+export async function getStaticProps() {
+  const supabaseAdmin = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || "",
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ""
+  );
+
+  let { data } = await supabaseAdmin
+    .from('questions')
+    .select('*')
+
+  console.log(data);
+
+  return {
+    props: { questions: data },
+  }
+}
+
+export default function Home({ questions }: { questions: Question[] }) {
   const { locale, locales } = useRouter()
   const boxBackground = useColorModeValue("niceGreen", "niceBlue")
   const mainBackground = useColorModeValue("niceOrange", "nicePurple")
   const { isOpen, onToggle } = useDisclosure()
   const lang = locale === "en-UK" ? en : es;
+
+  console.log(questions);
+
 
   return (
     <>

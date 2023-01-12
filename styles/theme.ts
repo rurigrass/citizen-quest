@@ -1,5 +1,6 @@
 // 1. import `extendTheme` function
 import { extendTheme } from '@chakra-ui/react'
+import { mode } from "@chakra-ui/theme-tools";
 import Button from "./Button"
 
 
@@ -8,14 +9,14 @@ const theme = extendTheme({
   initialColorMode: 'dark',
   useSystemColorMode: true,
   styles: {
-    global: {
+    global: (props: any) => ({
       body: {
-
+        bg: mode("niceOrange", "nicePurple")(props),
       },
       code: {
 
       }
-    }
+    })
   },
   colors: {
     niceBlue: "#00AEDE",
