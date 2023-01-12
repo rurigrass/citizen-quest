@@ -22,6 +22,7 @@ const Button = defineStyleConfig({
   },
   // Two variants: outline and solid
   variants: {
+
     outline: {
       border: '2px solid',
       borderColor: 'niceYellow',
