@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Flex, Heading, Button, VStack, useColorModeValue, Collapse, Box, useDisclosure } from '@chakra-ui/react';
 import Head from 'next/head'
@@ -5,50 +6,61 @@ import ToggleColorMode from '../components/ToggleColorMode';
 import ToggleLanguage from '../components/ToggleLanguage';
 import en from '../content/en';
 import es from '../content/es';
-import { createClient } from '@supabase/supabase-js';
-import { Question } from '../typings';
-import { useEffect, useState } from 'react';
-import supabase from '../utils/supabaseClient';
+import { IQuestion } from '../typings';
+import { supabase } from '../lib/supabaseClient';
+import Link from 'next/link';
+import Question from '../components/Question';
 
-export async function getStaticProps() {
-  const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL || "",
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ""
-  );
+export default function Home() {
+  const initialState = {
+    isExerciseShown: true,
+    quizQuestions: [],
+    isExerciseDone: false,
+    score: 0
+  };
 
-  let { data } = await supabaseAdmin
-    .from('questions')
-    .select('*')
+  const [state, setState] = useState(initialState)
+  const { isExerciseShown, quizQuestions, isExerciseDone, score } = state;
 
-  console.log(data);
 
-  return {
-    props: { questions: data },
-  }
-}
-
-export default function Home({ questions }: { questions: Question[] }) {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [userId, setUserId] = useState<string | undefined>();
+  const [questions, setQuestions] = useState<IQuestion[]>()
   const { locale, locales } = useRouter()
+  const lang = locale === "en-UK" ? en : es;
   const boxBackground = useColorModeValue("niceGreen", "niceBlue")
   const mainBackground = useColorModeValue("niceOrange", "nicePurple")
   const { isOpen, onToggle } = useDisclosure()
-  const lang = locale === "en-UK" ? en : es;
+
+
 
   useEffect(() => {
     const getUser = async () => {
       const user = await supabase.auth.getUser();
       if (user) {
         const userId = user.data.user?.id;
-        setIsAuthenticated(true)
-        setUserId(userId)
+        setIsAuthenticated(true);
+        setUserId(userId);
       }
     };
     getUser();
-  }, []);
+    // console.log("user id: ", userId);
+  }, [userId]);
 
-  console.log(questions);
+
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const { data, error } = await supabase.from("questions").select()
+        if (error) throw error;
+        setQuestions(data)
+      } catch (error: any) { alert(error.message) }
+    };
+    fetchQuestions()
+  }, [])
+
+  // console.log(questions);
+
 
 
   return (
@@ -62,16 +74,28 @@ export default function Home({ questions }: { questions: Question[] }) {
       </Flex>
       <Flex height="80vh" background={mainBackground} alignItems="center" justifyContent="center">
         <VStack direction="column" width={350} background={boxBackground} boxShadow="0.7rem 0.7rem 0rem black" p={12} rounded={6} spacing="10px" border="2px solid" borderColor='black'>
-          <Heading mb={6}>{lang.menu.title}</Heading>
-          <Button variant="solid" onClick={onToggle}>New Game</Button>
-          <Collapse in={isOpen} animateOpacity>
-            <Box color='white' bg='niceBlue' width="max" p={12} rounded={6} border="2px solid" borderColor='black'
-              boxShadow="0.3rem 0.3rem 0rem black inset"
-            >
-              <Button variant="solid">Start Game</Button>
-            </Box>
-          </Collapse>
-          <Button variant="solid">Leaderboard</Button>
+          {!isExerciseShown ? (
+            <>
+              <Heading mb={6}>{lang.menu.title}</Heading>
+              <Button variant="solid" onClick={onToggle}>New Game</Button>
+              <Collapse in={isOpen} animateOpacity>
+                <Box color='white' bg='niceBlue' width="max" p={12} rounded={6} border="2px solid" borderColor='black'
+                  boxShadow="0.3rem 0.3rem 0rem black inset"
+                >
+                  <Button variant="solid">Start Game</Button>
+                </Box>
+              </Collapse>
+              <Button variant="solid">Leaderboard</Button>
+            </>
+          ) : (
+            <>
+              {questions &&
+                <Question
+                  questions={questions}
+                />
+              }
+            </>
+          )}
         </VStack>
       </Flex>
     </>

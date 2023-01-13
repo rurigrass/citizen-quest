@@ -1,4 +1,4 @@
-export interface Question {
+export interface IQuestion {
   id: bigint
   country: string
   quest: string
@@ -24,3 +24,4 @@ export interface Question {
     es: string
   }
 }
+

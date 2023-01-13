@@ -1,7 +1,7 @@
 import { Box, Button, Checkbox, FormControl, FormLabel, Heading, HStack, Input, Text, VStack } from "@chakra-ui/react";
 import { useState } from "react"
 import { useRouter } from "next/router";
-import supabase from "../utils/supabaseClient";
+import { supabase } from "../lib/supabaseClient";
 
 const SignUp = () => {
     const [email, setEmail] = useState<string | undefined>();
