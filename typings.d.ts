@@ -8,16 +8,16 @@ export interface IQuestion {
     es: string
   }
   answers: {
-    en: {
-      A: string
-      B: string
-      C: string
-    }
-    es: {
-      A: string
-      B: string
-      C: string
-    }
+    en: [
+      { A: string },
+      { B: string },
+      { C: string }
+    ]
+    es: [
+      { A: string },
+      { B: string },
+      { C: string }
+    ]
   }
   answer: {
     en: string
