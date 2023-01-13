@@ -7,6 +7,8 @@ import en from '../content/en';
 import es from '../content/es';
 import { createClient } from '@supabase/supabase-js';
 import { Question } from '../typings';
+import { useEffect, useState } from 'react';
+import supabase from '../utils/supabaseClient';
 
 export async function getStaticProps() {
   const supabaseAdmin = createClient(
@@ -26,11 +28,25 @@ export async function getStaticProps() {
 }
 
 export default function Home({ questions }: { questions: Question[] }) {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [userId, setUserId] = useState<string | undefined>();
   const { locale, locales } = useRouter()
   const boxBackground = useColorModeValue("niceGreen", "niceBlue")
   const mainBackground = useColorModeValue("niceOrange", "nicePurple")
   const { isOpen, onToggle } = useDisclosure()
   const lang = locale === "en-UK" ? en : es;
+
+  useEffect(() => {
+    const getUser = async () => {
+      const user = await supabase.auth.getUser();
+      if (user) {
+        const userId = user.data.user?.id;
+        setIsAuthenticated(true)
+        setUserId(userId)
+      }
+    };
+    getUser();
+  }, []);
 
   console.log(questions);
 
