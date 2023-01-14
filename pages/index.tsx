@@ -8,12 +8,11 @@ import en from '../content/en';
 import es from '../content/es';
 import { IQuestion } from '../typings';
 import { supabase } from '../lib/supabaseClient';
-import Link from 'next/link';
 import Question from '../components/Question';
 
 export default function Home() {
   const initialState = {
-    isExerciseShown: true,
+    isExerciseShown: false,
     quizQuestions: [],
     isExerciseDone: false,
     score: 0
@@ -21,6 +20,8 @@ export default function Home() {
 
   const [state, setState] = useState(initialState)
   const { isExerciseShown, quizQuestions, isExerciseDone, score } = state;
+
+  // const [isExerciseShown, setIsExerciseShown] = useState(false)
 
 
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -59,10 +60,6 @@ export default function Home() {
     fetchQuestions()
   }, [])
 
-  // console.log(questions);
-
-
-
   return (
     <>
       <Head>
@@ -82,7 +79,7 @@ export default function Home() {
                 <Box color='white' bg='niceBlue' width="max" p={12} rounded={6} border="2px solid" borderColor='black'
                   boxShadow="0.3rem 0.3rem 0rem black inset"
                 >
-                  <Button variant="solid">Start Game</Button>
+                  <Button variant="solid" onClick={() => setState({ ...state, isExerciseShown: true })}>Start Game</Button>
                 </Box>
               </Collapse>
               <Button variant="solid">Leaderboard</Button>

@@ -33,8 +33,8 @@ const Question = ({ questions }: { questions: IQuestion[] }) => {
 
     return (
         <>
-            <Heading mb={6}>{questions[currentQuestion].question[lang]}</Heading>
-            {questions[currentQuestion].answers[lang].map(
+            <Heading mb={6}>{question.question[lang]}</Heading>
+            {question.answers[lang].map(
                 (answer, i) => (
                     <Button variant="solid" key={i}>
                         {Object.keys(answer)} : {Object.values(answer)}
