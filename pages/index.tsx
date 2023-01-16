@@ -60,38 +60,41 @@ export default function Home() {
   }, [])
 
   return (
-    <>
-      <Head>
-        <title>Citizen Quest</title>
-      </Head>
-      <div>
-        <ToggleLanguage locales={locales} />
-        {/* <ToggleColorMode /> */}
-      </div>
-      <div>
-        <div>
-          {!isExerciseShown ? (
-            <>
-              <h2>{lang.menu.title}</h2>
-              <button onClick={() => console.log('click')}>New Game</button>
-              {/* look this up its cool <Collapse in={isOpen} animateOpacity> */}
-              <div>
-                <button onClick={() => setState({ ...state, isExerciseShown: true })}>Start Game</button>
-              </div>
-              {/* </Collapse> */}
-              <button>Leaderboard</button>
-            </>
-          ) : (
-            <>
-              {questions &&
-                <Question
-                  questions={questions}
-                />
-              }
-            </>
-          )}
-        </div>
-      </div>
-    </>
+    <h1 className="text-4xl font-bold underline">
+      Hello world!
+    </h1>
+    // <>
+    //   <Head>
+    //     <title>Citizen Quest</title>
+    //   </Head>
+    //   <div>
+    //     <ToggleLanguage locales={locales} />
+    //     {/* <ToggleColorMode /> */}
+    //   </div>
+    //   <div>
+    //     <div>
+    //       {!isExerciseShown ? (
+    //         <>
+    //           <h2 className='font-bold text-3xl text-nice-blue'>{lang.menu.title}</h2>
+    //           <button onClick={() => console.log('click')}>New Game</button>
+    //           {/* look this up its cool <Collapse in={isOpen} animateOpacity> */}
+    //           <div>
+    //             <button onClick={() => setState({ ...state, isExerciseShown: true })}>Start Game</button>
+    //           </div>
+    //           {/* </Collapse> */}
+    //           <button>Leaderboard</button>
+    //         </>
+    //       ) : (
+    //         <>
+    //           {questions &&
+    //             <Question
+    //               questions={questions}
+    //             />
+    //           }
+    //         </>
+    //       )}
+    //     </div>
+    //   </div>
+    // </>
   )
 }
