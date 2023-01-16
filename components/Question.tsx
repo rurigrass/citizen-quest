@@ -1,4 +1,3 @@
-import { Button, Heading } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { IQuestion } from '../typings';
@@ -33,12 +32,12 @@ const Question = ({ questions }: { questions: IQuestion[] }) => {
 
     return (
         <>
-            <Heading mb={6}>{question.question[lang]}</Heading>
+            <h2 >{question.question[lang]}</h2>
             {question.answers[lang].map(
                 (answer, i) => (
-                    <Button variant="solid" key={i}>
+                    <button key={i}>
                         {Object.keys(answer)} : {Object.values(answer)}
-                    </Button>))}
+                    </button>))}
         </>
     )
 
