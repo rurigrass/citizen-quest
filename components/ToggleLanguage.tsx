@@ -1,6 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
 
 const ToggleLanguage = ({ locales }: { locales: string[] | undefined }) => {
     const router = useRouter()
@@ -17,7 +17,7 @@ const ToggleLanguage = ({ locales }: { locales: string[] | undefined }) => {
                 {locales && locales.map((l, i) =>
                     <Link key={i} href={asPath} locale={l}>
                         <div>
-                            <Image
+                            <img
                                 src='https://placekitten.com/100/100'
                                 alt='Fluffybuns the destroyer'
                             />
