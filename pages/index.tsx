@@ -60,8 +60,9 @@ export default function Home() {
   }, [])
 
   return (
-    <h1 className="text-4xl font-bold underline">
+    <h1 className="text-4xl font-bold underline text-nice-blue bg-nice-purple">
       Hello world!
+      <div className='bg-nice-purple h-10 w-10' ></div>
     </h1>
     // <>
     //   <Head>

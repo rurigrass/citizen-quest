@@ -1,10 +1,10 @@
-import { Button, useColorMode, useColorModeValue } from '@chakra-ui/react';
 
 const ToggleColorMode = () => {
-    const { toggleColorMode } = useColorMode()
-    const emoji = useColorModeValue("🌛", "🌞")
+    // const { toggleColorMode } = useColorMode()
+    // const emoji = useColorModeValue("🌛", "🌞")
 
-    return <Button onClick={toggleColorMode} variant="solid">{emoji}</Button>
+    return <button onClick={() => console.log("change colour")
+    }> {"emoji"}</button >
 }
 
 export default ToggleColorMode
