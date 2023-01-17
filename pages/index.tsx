@@ -8,6 +8,7 @@ import es from '../content/es';
 import { IQuestion } from '../typings';
 import { supabase } from '../lib/supabaseClient';
 import Question from '../components/Question';
+import Header from '../components/Header';
 
 export default function Home() {
   const initialState = {
@@ -60,42 +61,36 @@ export default function Home() {
   }, [])
 
   return (
-    <h1 className="text-4xl font-bold underline text-nice-blue bg-nice-purple">
-      Hello world!
-      <div className='bg-nice-purple h-10 w-10' ></div>
-    </h1>
-    // <>
-    //   <Head>
-    //     <title>Citizen Quest</title>
-    //   </Head>
-    //   <div>
-    //     <ToggleLanguage locales={locales} />
-    //     {/* <ToggleColorMode /> */}
-    //   </div>
-    //   <div>
-    //     <div>
-    //       {!isExerciseShown ? (
-    //         <>
-    //           <h2 className='font-bold text-3xl text-nice-blue'>{lang.menu.title}</h2>
-    //           <button onClick={() => console.log('click')}>New Game</button>
-    //           {/* look this up its cool <Collapse in={isOpen} animateOpacity> */}
-    //           <div>
-    //             <button onClick={() => setState({ ...state, isExerciseShown: true })}>Start Game</button>
-    //           </div>
-    //           {/* </Collapse> */}
-    //           <button>Leaderboard</button>
-    //         </>
-    //       ) : (
-    //         <>
-    //           {questions &&
-    //             <Question
-    //               questions={questions}
-    //             />
-    //           }
-    //         </>
-    //       )}
-    //     </div>
-    //   </div>
-    // </>
+    <>
+      <Head>
+        <title>Citizen Quest</title>
+      </Head>
+      <Header />
+      <div className='h-screen -mt-14 bg-nice-orange flex min-h-screen justify-center items-center'>
+        <div className='bg-nice-green p-9 text-center rounded-xl border-b-8 border-r-8 border-black m-2'>
+          {!isExerciseShown ? (
+            <>
+              <h1 className='font-bold text-4xl font-outline-1 text-nice-purple mb-7'>{lang.menu.title}</h1>
+              <button className='button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1' onClick={() => console.log('click')}>New Game</button>
+              {/* look this up its cool <Collapse in={isOpen} animateOpacity> */}
+              <div>
+                <button className='button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1' onClick={() => setState({ ...state, isExerciseShown: true })}>Start Game</button>
+              </div>
+              {/* </Collapse> */}
+              <button className='button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1'>Leaderboard</button>
+
+            </>
+          ) : (
+            <>
+              {questions &&
+                <Question
+                  questions={questions}
+                />
+              }
+            </>
+          )}
+        </div>
+      </div>
+    </>
   )
 }

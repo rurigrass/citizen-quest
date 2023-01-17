@@ -32,10 +32,10 @@ const Question = ({ questions }: { questions: IQuestion[] }) => {
 
     return (
         <>
-            <h2 >{question.question[lang]}</h2>
+            <h2 className='font-bold text-4xl font-outline-1 text-nice-purple mb-7'>{question.question[lang]}</h2>
             {question.answers[lang].map(
                 (answer, i) => (
-                    <button key={i}>
+                    <button className='button button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1' key={i}>
                         {Object.keys(answer)} : {Object.values(answer)}
                     </button>))}
         </>

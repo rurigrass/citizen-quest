@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    .font-outline-1 {
+        -webkit-text-stroke: 1px black;
+      }
+}
+
+@layer components {
+    .button {
+        @apply p-2 px-4 rounded-lg border-b-4 border-r-4 border-black shadow-lg hover:shadow-sm 
+    }
+}
