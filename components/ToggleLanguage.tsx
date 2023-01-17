@@ -8,8 +8,6 @@ const ToggleLanguage = ({ locales }: { locales: string[] | undefined }) => {
     const router = useRouter()
     const { asPath, locale } = router;
     // console.log(locales.filter(language => language !== locale));
-    console.log(dropdownOpen);
-
 
 
     return (
@@ -19,7 +17,7 @@ const ToggleLanguage = ({ locales }: { locales: string[] | undefined }) => {
             </button>
             {dropdownOpen &&
                 <>
-                    <button onClick={(e) => { e.preventDefault(), setDropdownOpen(false) }} className="fixed w-full h-full bg-nice-purple opacity-50 inset-0 z-10 cursor-default"></button>
+                    <button onClick={(e) => { e.preventDefault(), setDropdownOpen(false) }} className="fixed w-full h-full bg-black opacity-40 inset-0 z-10 cursor-default"></button>
                     <ul className='absolute mt-1 right-1 z-20 bg-white rounded-xl overflow-auto'>
                         {locales && locales.filter(language => language !== locale).map((l, i) =>
                             <Link key={i} href={asPath} locale={l}><li className='button bg-nice-yellow hover:bg-nice-blue hover:text-white py-1' key={i}>{l.substring(0, 2)}</li></Link>

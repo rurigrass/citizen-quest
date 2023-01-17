@@ -12,14 +12,15 @@ import Header from '../components/Header';
 
 export default function Home() {
   const initialState = {
-    isExerciseShown: false,
+    showExercise: false,
+    showGameSettings: false,
     quizQuestions: [],
     isExerciseDone: false,
     score: 0
   };
 
   const [state, setState] = useState(initialState)
-  const { isExerciseShown, quizQuestions, isExerciseDone, score } = state;
+  const { showExercise, showGameSettings, quizQuestions, isExerciseDone, score } = state;
 
   // const [isExerciseShown, setIsExerciseShown] = useState(false)
 
@@ -67,18 +68,18 @@ export default function Home() {
       </Head>
       <Header />
       <div className='h-screen -mt-14 bg-nice-orange flex min-h-screen justify-center items-center'>
-        <div className='bg-nice-green p-9 text-center rounded-xl border-b-8 border-r-8 border-black m-2'>
-          {!isExerciseShown ? (
+        <div className='bg-nice-green p-9 text-center rounded-xl border-b-8 border-r-8 border-blacks outline outline-1 outline-black flex flex-col'>
+          {!showExercise ? (
             <>
-              <h1 className='font-bold text-4xl font-outline-1 text-nice-purple mb-7'>{lang.menu.title}</h1>
-              <button className='button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1' onClick={() => console.log('click')}>New Game</button>
-              {/* look this up its cool <Collapse in={isOpen} animateOpacity> */}
-              <div>
-                <button className='button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1' onClick={() => setState({ ...state, isExerciseShown: true })}>Start Game</button>
-              </div>
-              {/* </Collapse> */}
+              <h1 className='font-bold text-4xl text-nice-purple mb-7'>{lang.menu.title}</h1>
+              <button className='button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1' onClick={() => setState({ ...state, showGameSettings: !showGameSettings })}>New Game</button>
+              {showGameSettings &&
+                <div className='bg-nice-orange p-5 rounded-lg border-t-4 border-l-4 border-black outline outline-1 outline-black my-4'>
+                  {/* setting sliders go here */}
+                  <button className='button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1' onClick={() => setState({ ...state, showExercise: true })}>Start Game</button>
+                </div>
+              }
               <button className='button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1'>Leaderboard</button>
-
             </>
           ) : (
             <>
