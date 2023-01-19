@@ -8,20 +8,17 @@ export interface IQuestion {
     es: string
   }
   answers: {
-    en: [
-      { A: string },
-      { B: string },
-      { C: string }
-    ]
-    es: [
-      { A: string },
-      { B: string },
-      { C: string }
-    ]
+    en: string[]
+    es: string[]
   }
   answer: {
-    en: string
-    es: string
+    en: string[]
+    es: string[]
   }
+}
+
+export type TAnswers = {
+  en: string[]
+  es: string[]
 }
 

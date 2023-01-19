@@ -9,6 +9,7 @@ import { IQuestion } from '../typings';
 import { supabase } from '../lib/supabaseClient';
 import Question from '../components/Question';
 import Header from '../components/Header';
+import Answers from '../components/Answers';
 
 export default function Home() {
   const initialState = {
