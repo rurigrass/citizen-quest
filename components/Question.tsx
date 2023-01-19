@@ -40,7 +40,7 @@ const Question = ({ questions }: { questions: IQuestion[] }) => {
             <h2 className='font-bold text-4xl font-outline-1 text-nice-purple mb-7'>{question.question[lang]}</h2>
             {question.answers[lang].map(
                 (answer, i) => (
-                    <button className='button button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1' key={i} onClick={() => setState({ ...state, selectedAnswer: answer })
+                    <button className={answer === selectedAnswer ? 'button bg-nice-purple text-white m-1' : 'button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1'} key={i} onClick={() => setState({ ...state, selectedAnswer: answer })
                     }>
                         {labels[i]}: {answer}
                     </button>))
