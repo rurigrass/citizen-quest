@@ -10,9 +10,9 @@
 
 @layer components {
     .button { 
-        @apply transition ease-in-out p-2 px-4 rounded-lg border-b-4 border-r-4 hover:border-b-2 hover:border-r-2 border-black shadow-lg hover:shadow-sm  outline outline-1 outline-black font-medium
+        @apply m-1 transition ease-in-out p-2 px-4 rounded-lg border-b-4 border-r-4 hover:border-b-2 hover:mb-1.5 hover:border-r-2 border-black shadow-lg hover:shadow-sm  outline outline-1 outline-black font-medium
     }
     .button-pressed {
-        @apply p-2 px-4 rounded-lg outline outline-1 outline-black font-medium
+        @apply m-1 p-2 px-4 rounded-lg outline outline-1 outline-black font-medium mb-2
     }
 }

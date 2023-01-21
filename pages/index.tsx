@@ -13,7 +13,7 @@ import Answers from '../components/Answers';
 
 export default function Home() {
   const initialState = {
-    showExercise: false,
+    showExercise: true,
     showGameSettings: false,
     quizQuestions: [],
     isExerciseDone: false,
