@@ -89,7 +89,7 @@ export default function Home() {
                   <Question
                     questions={questions}
                   />
-                  <button className='button bg-nice-greenMiddle mt-8 mx-32 hover:text-white' onClick={() => console.log('ahoj')}>Select</button>
+                  <button className='button bg-nice-greenMiddle mt-8 mx-32 hover:text-white' onClick={() => console.log(state)}>Select</button>
                 </>
               }
             </>
