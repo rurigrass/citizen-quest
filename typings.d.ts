@@ -22,3 +22,10 @@ export type TAnswers = {
   es: string[]
 }
 
+export interface IState {
+  showExercise: boolean,
+  showGameSettings: boolean,
+  quizQuestions: IQuestion[] | [],
+  isExerciseDone: boolean,
+  score: number
+}

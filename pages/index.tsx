@@ -5,7 +5,7 @@ import Head from 'next/head'
 import ToggleLanguage from '../components/ToggleLanguage';
 import en from '../content/en';
 import es from '../content/es';
-import { IQuestion } from '../typings';
+import { IQuestion, IState } from '../typings';
 import { supabase } from '../lib/supabaseClient';
 import Question from '../components/Question';
 import Header from '../components/Header';
@@ -20,7 +20,7 @@ export default function Home() {
     score: 0
   };
 
-  const [state, setState] = useState(initialState)
+  const [state, setState] = useState<IState>(initialState)
   const { showExercise, showGameSettings, quizQuestions, isExerciseDone, score } = state;
 
   // const [isExerciseShown, setIsExerciseShown] = useState(false)
@@ -28,15 +28,16 @@ export default function Home() {
 
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [userId, setUserId] = useState<string | undefined>();
-  const [questions, setQuestions] = useState<IQuestion[]>()
   const { locale, locales } = useRouter()
   const lang = locale === "en-UK" ? en : es;
   // const boxBackground = useColorModeValue("niceGreen", "niceBlue")
   // const mainBackground = useColorModeValue("niceOrange", "nicePurple")
   // const { isOpen, onToggle } = useDisclosure()
+  // console.log(state);
 
 
 
+  //LOGIN STUFF
   useEffect(() => {
     const getUser = async () => {
       const user = await supabase.auth.getUser();
@@ -50,13 +51,13 @@ export default function Home() {
     // console.log("user id: ", userId);
   }, [userId]);
 
-
+  //FETCH THE QUESTIONS
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
         const { data, error } = await supabase.from("questions").select()
         if (error) throw error;
-        setQuestions(data)
+        setState(state => ({ ...state, quizQuestions: data }))
       } catch (error: any) { alert(error.message) }
     };
     fetchQuestions()
@@ -84,10 +85,10 @@ export default function Home() {
             </>
           ) : (
             <>
-              {questions &&
+              {quizQuestions &&
                 <>
                   <Question
-                    questions={questions}
+                    questions={quizQuestions}
                   />
                   <button className='button bg-nice-greenMiddle mt-8 mx-32 hover:text-white' onClick={() => console.log(state)}>Select</button>
                 </>
