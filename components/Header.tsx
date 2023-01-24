@@ -14,7 +14,6 @@ const Header = () => {
             </div>
             <div className="flex items-center space-x-5 text-green-green">
                 <ToggleLanguage locales={locales} />
-                <h3 className="text-white bg-green-green px-4 py-1 rounded-full">Post</h3>
             </div>
         </header>
     )

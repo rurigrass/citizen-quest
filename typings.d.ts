@@ -12,20 +12,27 @@ export interface IQuestion {
     es: string[]
   }
   answer: {
-    en: string[]
-    es: string[]
+    en: string
+    es: string
   }
 }
 
-export type TAnswers = {
-  en: string[]
-  es: string[]
+export interface TAnswers {
+  en: string
+  es: string
 }
 
 export interface IState {
   showExercise: boolean,
   showGameSettings: boolean,
-  quizQuestions: IQuestion[] | [],
+  quizQuestions: IQuestion[] | any[],
   isExerciseDone: boolean,
   score: number
+}
+
+export interface IQuiz {
+  currentQuestion: number,
+  answers: boolean[],
+  numberOfQuestions: number,
+  selectedAnswer: string
 }

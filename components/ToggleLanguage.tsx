@@ -8,7 +8,7 @@ import Backdrop from './Backdrop';
 const ToggleLanguage = ({ locales }: { locales: string[] | undefined }) => {
     const router = useRouter()
     const { asPath, locale } = router;
-    const [dropdownOpen, setDropdownOpen] = useState(true)
+    const [dropdownOpen, setDropdownOpen] = useState(false)
     const openDropdown = () => setDropdownOpen(true)
     const closeDropdown = () => setDropdownOpen(false)
 
@@ -56,7 +56,7 @@ const ToggleLanguage = ({ locales }: { locales: string[] | undefined }) => {
                             animate="visible"
                             exit="exit"
                         >
-                            <ul className='absolute mt-12 right-[102px] z-20 rounded-xl overflow-auto'>
+                            <ul className='absolute mt-12 right-4 z-20 rounded-xl overflow-auto'>
                                 {locales && locales.filter(language => language !== locale).map((l, i) =>
                                     <Link key={i} href={asPath} locale={l}><li className='z-30 button bg-nice-yellow hover:bg-nice-blue hover:text-white py-1' key={i}>{l.substring(0, 2)}</li></Link>
                                 )}
