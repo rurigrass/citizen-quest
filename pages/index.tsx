@@ -29,7 +29,7 @@ export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [userId, setUserId] = useState<string | undefined>();
   const { locale, locales } = useRouter()
-  const lang = locale === "en-UK" ? en : es;
+  const lang = locale?.slice(0, 2) === "en" ? en : es;
   // const boxBackground = useColorModeValue("niceGreen", "niceBlue")
   // const mainBackground = useColorModeValue("niceOrange", "nicePurple")
   // const { isOpen, onToggle } = useDisclosure()

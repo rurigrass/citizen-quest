@@ -3,9 +3,11 @@ import { useState } from 'react';
 import { IQuestion, IQuiz } from '../typings';
 
 const Quiz = ({ questions }: { questions: IQuestion[] }) => {
-    const { locale } = useRouter();
+    const { locale, locales } = useRouter();
+    console.log(locales);
+
     const labels = ["A", "B", "C", "D", "E"];
-    const lang = locale === "en-UK" ? "en" : "es";
+    const lang = locale?.slice(0, 2) === "en" ? "en" : "es";
     const initialState: IQuiz = {
         currentQuestion: 0,
         answers: [],

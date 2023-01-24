@@ -57,7 +57,7 @@ const ToggleLanguage = ({ locales }: { locales: string[] | undefined }) => {
                             exit="exit"
                         >
                             <ul className='absolute mt-12 right-4 z-20 rounded-xl overflow-auto'>
-                                {locales && locales.filter(language => language !== locale).map((l, i) =>
+                                {locales && locales.filter(language => language !== locale?.slice(0, 2)).map((l, i) =>
                                     <Link key={i} href={asPath} locale={l}><li className='z-30 button bg-nice-yellow hover:bg-nice-blue hover:text-white py-1' key={i}>{l.substring(0, 2)}</li></Link>
                                 )}
                             </ul>
