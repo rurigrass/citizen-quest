@@ -33,7 +33,7 @@ export default function Home() {
   // const boxBackground = useColorModeValue("niceGreen", "niceBlue")
   // const mainBackground = useColorModeValue("niceOrange", "nicePurple")
   // const { isOpen, onToggle } = useDisclosure()
-  // console.log(state);
+  console.log(locale);
 
 
 

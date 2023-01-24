@@ -4,8 +4,6 @@ import { IQuestion, IQuiz } from '../typings';
 
 const Quiz = ({ questions }: { questions: IQuestion[] }) => {
     const { locale, locales } = useRouter();
-    console.log(locales);
-
     const labels = ["A", "B", "C", "D", "E"];
     const lang = locale?.slice(0, 2) === "en" ? "en" : "es";
     const initialState: IQuiz = {
@@ -24,7 +22,6 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
     // console.log("current question", currentQuestion);
     // console.log(questions);
     // console.log(numberOfQuestions);
-    console.log(state);
 
 
 
