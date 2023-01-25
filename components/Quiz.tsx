@@ -18,7 +18,7 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
     let { currentQuestion, answers, numberOfQuestions, selectedAnswer, progress } = state;
     const question = questions[currentQuestion];
     numberOfQuestions = questions.length;
-    progress = currentQuestion / numberOfQuestions * 100
+    progress = Math.round(currentQuestion / numberOfQuestions * 100)
 
     // console.log("current question object", question.question);
     // console.log("current question", currentQuestion);
@@ -52,9 +52,10 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
             {question &&
                 <>
                     {progress >= 0 &&
-                        <div className={`absolute -top-7 left-0 right-0 mx-auto w-3/4 bg-nice-yellow h-4 rounded-full outline outline-1 outline-black border-b-4 border-r-4`}>
+                        <div className='absolute -top-7 left-0 right-0 mx-auto w-3/4 bg-nice-yellow h-4 rounded-full outline outline-1 outline-black border-b-4 border-r-4'>
                             <div className={`relative bg-nice-purple h-3 w-[${progress}%] rounded-xl `} >
                                 <div className='absolute w-1/3 bg-white opacity-20 h-1 right-2 top-0.5 rounded-full' />
+                                {progress}
                             </div>
                         </div>
                     }
