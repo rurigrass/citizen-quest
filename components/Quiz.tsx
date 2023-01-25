@@ -22,9 +22,9 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
     progress = Math.round(currentQuestion / numberOfQuestions * 100)
 
     // console.log("these are the answers", answers, "current question", currentQuestion, answers[currentQuestion - 1]);
-    const isAnswerCorrect = (answer: boolean) => {
-        return <>{answer ? (<div>true!</div>) : (<div>false!</div>)}</>
-    }
+    const isAnswerCorrect = (answer: boolean) => (
+        <>{answer ? (<div>true!</div>) : (<div>false!</div>)}</>
+    )
 
     const checkAnswer = () => {
         setShowAnswer(true)
