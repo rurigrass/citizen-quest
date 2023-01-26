@@ -1,3 +1,5 @@
+import React from "react"
+
 export interface IQuestion {
   id: bigint
   country: string

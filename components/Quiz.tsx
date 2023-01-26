@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { IQuestion, IQuiz } from '../typings';
 import { motion } from "framer-motion";
+import ResizeablePanel from './ResizeablePanel';
 
 const Quiz = ({ questions }: { questions: IQuestion[] }) => {
     const { locale, locales } = useRouter();
@@ -84,16 +85,11 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
                                 {isAnswerCorrect(answers[currentQuestion])}
                                 <div className='font-bold text-2xl font-outline-1 text-nice-purple my-4 space-y-4'>
                                     <p>{question.question[lang]} </p>
-                                    <motion.div
-                                        initial={{ height: 0 }}
-                                        animate={{ height: "auto" }}
-                                        transition={{ duration: 0.5, delay: 0.5 }}
-                                        className="overflow-hidden"
-                                    >
+                                    <ResizeablePanel>
                                         <div className='text-nice-greenMiddle text-2xl p-4 bg-nice-yellow rounded-lg border-t-4 border-l-4 border-black'>
                                             {question.answer[lang]}
                                         </div>
-                                    </motion.div>
+                                    </ResizeablePanel>
                                 </div>
                                 <button className='button bg-nice-greenMiddle text-white w-1/2 mx-auto disabled:opacity-50 m-1 mt-4' onClick={() => nextQuestion()}>Next Question</button>
                             </>
