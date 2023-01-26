@@ -21,6 +21,9 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
     numberOfQuestions = questions.length;
     let progress = Math.round(currentQuestion / numberOfQuestions * 100)
 
+    console.log(state);
+
+
     const checkAnswer = () => {
         setShowAnswer(true)
         setState({
@@ -74,7 +77,7 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
                                         }>
                                             {labels[i]}: {answer}
                                         </button>))}
-                                <button className='button bg-nice-greenMiddle text-white w-1/2 mx-auto disabled:opacity-50 m-1 mt-4' onClick={() => checkAnswer()}>Check</button>
+                                <button className='button bg-nice-greenMiddle text-white w-1/2 mx-auto disabled:opacity-50 m-1 mt-4' disabled={state.selectedAnswer === ""} onClick={() => checkAnswer()}>Check</button>
                             </>
                             :
                             <>
