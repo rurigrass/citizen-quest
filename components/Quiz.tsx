@@ -52,7 +52,7 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
         <div className='relative'>
             {progress >= 0 &&
                 <div
-                    className='absolute -top-7 left-0 right-0 mx-auto w-3/4 bg-nice-yellow h-4 rounded-full outline outline-1 outline-black border-b-4 border-r-4'>
+                    className='absolute -top-16 left-0 right-0 mx-auto w-3/4 bg-nice-yellow h-4 rounded-full outline outline-1 outline-black border-b-4 border-r-4'>
                     <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${progress}%` }}
@@ -64,7 +64,7 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
             }
             {question !== undefined ?
                 <>
-                    <div className='py-9 px-3 md:px-9 flex flex-col'>
+                    <div className=' flex flex-col'>
                         {showAnswer === false ?
                             <>
                                 <h2 className='font-bold text-4xl font-outline-1 text-nice-purple mb-7'>{question.question[lang]}</h2>

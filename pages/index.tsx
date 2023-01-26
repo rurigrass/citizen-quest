@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { motion } from 'framer-motion';
 import Head from 'next/head'
 // import ToggleColorMode from '../components/ToggleColorMode';
 import ToggleLanguage from '../components/ToggleLanguage';
@@ -69,16 +70,23 @@ export default function Home() {
       </Head>
       <Header />
       <div className='h-screen -mt-14 bg-nice-orange flex min-h-screen justify-center items-center'>
-        <div className='bg-nice-green mx-2 w-full sm:w-4/5 md:w-3/4 lg:w-1/2 text-center rounded-xl border-b-8 border-r-8 border-blacks outline outline-1 outline-black flex flex-col'>
+        <div className='bg-nice-green mx-2 w-full sm:w-4/5 md:w-3/4 lg:w-1/2 py-9 px-3 md:px-9 text-center rounded-xl border-b-8 border-r-8 border-blacks outline outline-1 outline-black flex flex-col'>
           {!showExercise ? (
             <>
               <h1 className='font-bold text-4xl text-nice-purple mb-7'>{lang.menu.title}</h1>
               <button className='button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1' onClick={() => setState({ ...state, showGameSettings: !showGameSettings })}>New Game</button>
               {showGameSettings &&
-                <div className='bg-nice-orange p-5 rounded-lg border-t-4 border-l-4 border-black outline outline-1 outline-black my-4'>
-                  {/* setting sliders go here */}
-                  <button className='button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1' onClick={() => setState({ ...state, showExercise: true })}>Start Game</button>
-                </div>
+                <motion.div
+                  initial={{ height: 0 }}
+                  animate={{ height: "auto" }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                  className="overflow-hidden"
+                >
+                  <div className='bg-nice-orange p-5 rounded-lg border-t-4 border-l-4 border-black outline outline-1 outline-black my-4'>
+                    {/* setting sliders go here */}
+                    <button className='button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1' onClick={() => setState({ ...state, showExercise: true })}>Start Game</button>
+                  </div>
+                </motion.div>
               }
               <button className='button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1'>Leaderboard</button>
             </>
