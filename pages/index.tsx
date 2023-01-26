@@ -13,7 +13,7 @@ import Answers from '../components/Answers';
 
 export default function Home() {
   const initialState = {
-    showExercise: true,
+    showExercise: false,
     showGameSettings: false,
     quizQuestions: [],
     isExerciseDone: false,
@@ -69,7 +69,7 @@ export default function Home() {
       </Head>
       <Header />
       <div className='h-screen -mt-14 bg-nice-orange flex min-h-screen justify-center items-center'>
-        <div className='bg-nice-green mx-2 w-full sm:w-4/5 md:w-3/4 lg:w-1/2 text-center rounded-xl border-b-8 border-r-8 border-blacks outline outline-1 outline-black '>
+        <div className='bg-nice-green mx-2 w-full sm:w-4/5 md:w-3/4 lg:w-1/2 text-center rounded-xl border-b-8 border-r-8 border-blacks outline outline-1 outline-black flex flex-col'>
           {!showExercise ? (
             <>
               <h1 className='font-bold text-4xl text-nice-purple mb-7'>{lang.menu.title}</h1>

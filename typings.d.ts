@@ -35,5 +35,4 @@ export interface IQuiz {
   answers: boolean[],
   numberOfQuestions: number,
   selectedAnswer: string
-  progress: number
 }

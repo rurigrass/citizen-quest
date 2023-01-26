@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { IQuestion, IQuiz } from '../typings';
+import { motion } from "framer-motion";
 
 const Quiz = ({ questions }: { questions: IQuestion[] }) => {
     const { locale, locales } = useRouter();
@@ -11,21 +12,14 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
         answers: [],
         selectedAnswer: "",
         numberOfQuestions: 0,
-        progress: 0,
     };
 
     const [state, setState] = useState(initialState);
-    const [showAnswer, setShowAnswer] = useState(false)
-    let { currentQuestion, answers, selectedAnswer, numberOfQuestions, progress } = state;
+    const [showAnswer, setShowAnswer] = useState<boolean>(false)
+    let { currentQuestion, answers, selectedAnswer, numberOfQuestions } = state;
     const question = questions[currentQuestion];
     numberOfQuestions = questions.length;
-    progress = Math.round(currentQuestion / numberOfQuestions * 100)
-
-    console.log(questions);
-    console.log(state);
-
-
-    // console.log("these are the answers", answers, "current question", currentQuestion, answers[currentQuestion - 1]);
+    let progress = Math.round(currentQuestion / numberOfQuestions * 100)
 
     const checkAnswer = () => {
         setShowAnswer(true)
@@ -42,8 +36,6 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
     }
 
     const isAnswerCorrect = (answer: boolean) => {
-        console.log("ANSWER: ", answer);
-
         return (
             <>{answer ? (
                 <h2 className='text-nice-greenMiddle text-4xl font-bold'>
@@ -58,16 +50,20 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
 
     return (
         <div className='relative'>
+            {progress >= 0 &&
+                <div
+                    className='absolute -top-7 left-0 right-0 mx-auto w-3/4 bg-nice-yellow h-4 rounded-full outline outline-1 outline-black border-b-4 border-r-4'>
+                    <motion.div
+                        initial={{ width: 0 }}
+                        animate={{ width: `${progress}%` }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                        className="relative bg-nice-purple h-3 transition rounded-xl" >
+                        <div className='absolute w-1/3 bg-white opacity-20 h-1 right-2 top-0.5 rounded-full' />
+                    </motion.div>
+                </div>
+            }
             {question !== undefined ?
                 <>
-                    {progress >= 0 &&
-                        <div className='absolute -top-7 left-0 right-0 mx-auto w-3/4 bg-nice-yellow h-4 rounded-full outline outline-1 outline-black border-b-4 border-r-4'>
-                            <div className={`relative bg-nice-purple h-3 w-[${progress}%] rounded-xl `} >
-                                <div className='absolute w-1/3 bg-white opacity-20 h-1 right-2 top-0.5 rounded-full' />
-                                {/* {progress} */}
-                            </div>
-                        </div>
-                    }
                     <div className='py-9 px-3 md:px-9 flex flex-col'>
                         {showAnswer === false ?
                             <>
@@ -85,7 +81,16 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
                                 {isAnswerCorrect(answers[currentQuestion])}
                                 <div className='font-bold text-2xl font-outline-1 text-nice-purple my-4 space-y-4'>
                                     <p>{question.question[lang]} </p>
-                                    <p className='text-nice-greenMiddle text-2xl p-4 bg-nice-yellow rounded-lg border-t-4 border-l-4 border-black'>{question.answer[lang]} </p>
+                                    <motion.div
+                                        initial={{ height: 0 }}
+                                        animate={{ height: "auto" }}
+                                        transition={{ duration: 0.5, delay: 0.5 }}
+                                        className="overflow-hidden"
+                                    >
+                                        <div className='text-nice-greenMiddle text-2xl p-4 bg-nice-yellow rounded-lg border-t-4 border-l-4 border-black'>
+                                            {question.answer[lang]}
+                                        </div>
+                                    </motion.div>
                                 </div>
                                 <button className='button bg-nice-greenMiddle text-white w-1/2 mx-auto disabled:opacity-50 m-1 mt-4' onClick={() => nextQuestion()}>Next Question</button>
                             </>
