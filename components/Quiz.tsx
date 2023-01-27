@@ -16,8 +16,8 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
     };
 
     const [state, setState] = useState(initialState);
-    const [showAnswer, setShowAnswer] = useState<boolean>(false)
     let { currentQuestion, answers, selectedAnswer, numberOfQuestions } = state;
+    const [showAnswer, setShowAnswer] = useState<boolean>(false)
     const question = questions[currentQuestion];
     numberOfQuestions = questions.length;
     let progress = Math.round(currentQuestion / numberOfQuestions * 100)
@@ -85,7 +85,7 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
                                 {isAnswerCorrect(answers[currentQuestion])}
                                 <div className='font-bold text-2xl font-outline-1 text-nice-purple my-4 space-y-4'>
                                     <p>{question.question[lang]} </p>
-                                    <ResizeablePanel>
+                                    <ResizeablePanel delayTime={0.5}>
                                         <div className='text-nice-greenMiddle text-2xl p-4 bg-nice-yellow rounded-lg border-t-4 border-l-4 border-black'>
                                             {question.answer[lang]}
                                         </div>

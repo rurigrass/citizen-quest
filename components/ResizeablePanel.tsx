@@ -1,14 +1,19 @@
 import { motion } from "framer-motion"
+import useMeasure from "react-use-measure";
 
-const ResizeablePanel = ({ children }: { children: React.ReactNode }) => {
+
+const ResizeablePanel = ({ children, delayTime }: { children: React.ReactNode, delayTime: number }) => {
+    let [ref, { height }] = useMeasure();
     return (
         <motion.div
             initial={{ height: 0 }}
-            animate={{ height: "auto" }}
-            transition={{ duration: 0.5, delay: 0.25 }}
+            animate={{ height }}
+            transition={{ duration: 0.5, delay: delayTime }}
             className="overflow-hidden"
         >
-            {children}
+            <div ref={ref}>
+                {children}
+            </div>
         </motion.div>
     )
 }
