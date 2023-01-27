@@ -84,7 +84,7 @@ export default function Home() {
                 //   className="overflow-hidden"
                 // >
                 <ResizeablePanel delayTime={0.25}>
-                  <div className='bg-nice-orange p-5 rounded-lg border-t-4 border-l-4 border-black outline outline-1 outline-black my-4'>
+                  <div className='bg-nice-orange p-5 rounded-lg border-t-4 border-l-4 border-black outline outline-1 outline-black'>
                     {/* setting sliders go here */}
                     <button className='button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1' onClick={() => setState({ ...state, showExercise: true })}>Start Game</button>
                   </div>
