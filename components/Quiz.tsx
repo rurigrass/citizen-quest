@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { IQuestion, IQuiz } from '../typings';
 import { motion } from "framer-motion";
 import ResizeablePanel from './ResizeablePanel';
+import FadeIn from './FadeIn';
 
 const Quiz = ({ questions }: { questions: IQuestion[] }) => {
     const { locale, locales } = useRouter();
@@ -67,7 +68,7 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
                 </div>
             }
             {question !== undefined ?
-                <>
+                <ResizeablePanel delayTime={0}>
                     <div className=' flex flex-col'>
                         {showAnswer === false ?
                             <>
@@ -85,17 +86,19 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
                                 {isAnswerCorrect(answers[currentQuestion])}
                                 <div className='font-bold text-2xl font-outline-1 text-nice-purple my-4 space-y-4'>
                                     <p>{question.question[lang]} </p>
-                                    <ResizeablePanel delayTime={0.5}>
+                                    <ResizeablePanel delayTime={0} durationTime={0.5}>
                                         <div className='text-nice-greenMiddle text-2xl p-4 bg-nice-yellow rounded-lg border-t-4 border-l-4 border-black'>
                                             {question.answer[lang]}
                                         </div>
                                     </ResizeablePanel>
                                 </div>
-                                <button className='button bg-nice-greenMiddle text-white w-1/2 mx-auto disabled:opacity-50 m-1 mt-4' onClick={() => nextQuestion()}>Next Question</button>
+                                <FadeIn>
+                                    <button className='button bg-nice-greenMiddle text-white w-1/2 mx-auto disabled:opacity-50 m-1 mt-4' onClick={() => nextQuestion()}>Next Question</button>
+                                </FadeIn>
                             </>
                         }
                     </div>
-                </>
+                </ResizeablePanel>
                 :
                 <>
                     good job
@@ -104,7 +107,6 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
             }
         </div >
     )
-
 }
 
 export default Quiz
