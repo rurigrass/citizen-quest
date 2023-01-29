@@ -101,7 +101,7 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
                 </ResizeablePanel>
                 :
                 <>
-                    good job
+                    good job g
                     {/* ONLY SHOW ONCE COMPLETED */}
                 </>
             }
