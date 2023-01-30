@@ -21,19 +21,12 @@ export default function Home() {
 
   const [state, setState] = useState<IState>(initialState)
   const { showExercise, showGameSettings, quizQuestions, isExerciseDone, score } = state;
-
-  // const [isExerciseShown, setIsExerciseShown] = useState(false)
-
-
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [userId, setUserId] = useState<string | undefined>();
   const { locale, locales } = useRouter()
   const lang = locale?.slice(0, 2) === "en" ? en : es;
   // const boxBackground = useColorModeValue("niceGreen", "niceBlue")
   // const mainBackground = useColorModeValue("niceOrange", "nicePurple")
-  // const { isOpen, onToggle } = useDisclosure()
-
-
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [userId, setUserId] = useState<string | undefined>();
 
   //LOGIN STUFF
   useEffect(() => {
