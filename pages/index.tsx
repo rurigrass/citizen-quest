@@ -1,17 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { motion } from 'framer-motion';
 import Head from 'next/head'
 // import ToggleColorMode from '../components/ToggleColorMode';
-import ToggleLanguage from '../components/ToggleLanguage';
 import en from '../content/en';
 import es from '../content/es';
 import { IState } from '../typings';
 import { supabase } from '../lib/supabaseClient';
 import Quiz from '../components/Quiz';
 import Header from '../components/Header';
-import Answers from '../components/Answers';
-import ResizeablePanel from '../components/ResizeablePanel';
+import ResizeablePanel from '../components/Motion/ResizeablePanel';
 
 export default function Home() {
   const initialState = {

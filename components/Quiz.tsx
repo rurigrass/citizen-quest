@@ -2,8 +2,9 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { IQuestion, IQuiz } from '../typings';
 import { motion } from "framer-motion";
-import ResizeablePanel from './ResizeablePanel';
-import FadeIn from './FadeIn';
+import ResizeablePanel from './Motion/ResizeablePanel';
+import FadeIn from './Motion/FadeIn';
+import ScaleIn from './Motion/ScaleIn';
 
 const Quiz = ({ questions }: { questions: IQuestion[] }) => {
     const { locale, locales } = useRouter();
@@ -80,18 +81,20 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
                             </>
                             :
                             <>
-                                <FadeIn delayTime={0}>
+                                <ScaleIn delayTime={0}>
                                     {isAnswerCorrect(answers[currentQuestion])}
-                                </FadeIn>
+                                </ScaleIn>
                                 <div className='font-bold text-2xl font-outline-1 text-nice-purple my-4 space-y-4'>
-                                    <p>{question.question[lang]} </p>
-                                    <ResizeablePanel delayTime={0.5} durationTime={1} >
+                                    <FadeIn delayTime={0.75}>
+                                        <p>{question.question[lang]} </p>
+                                    </FadeIn>
+                                    <ResizeablePanel delayTime={1.25} durationTime={0.75} >
                                         <div className='text-nice-greenMiddle text-2xl p-4 bg-nice-yellow rounded-lg border-t-4 border-l-4 border-black'>
                                             {question.answer[lang]}
                                         </div>
                                     </ResizeablePanel>
                                 </div>
-                                <FadeIn delayTime={1}>
+                                <FadeIn delayTime={2.25}>
                                     <button className='button bg-nice-greenMiddle text-white w-1/2 mx-auto disabled:opacity-50 m-1 mt-4' onClick={() => nextQuestion()}>Next Question</button>
                                 </FadeIn>
                             </>
