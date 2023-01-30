@@ -23,9 +23,6 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
     numberOfQuestions = questions.length;
     let progress = Math.round(currentQuestion / numberOfQuestions * 100)
 
-    console.log(state);
-
-
     const checkAnswer = () => {
         setShowAnswer(true)
         setState({
@@ -67,10 +64,10 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
                     </motion.div>
                 </div>
             }
-            {question !== undefined ?
-                <ResizeablePanel delayTime={0}>
+            <ResizeablePanel delayTime={0}>
+                {question !== undefined ?
                     <div className=' flex flex-col'>
-                        {showAnswer === false ?
+                        {!showAnswer ?
                             <>
                                 <h2 className='font-bold text-4xl font-outline-1 text-nice-purple mb-7'>{question.question[lang]}</h2>
                                 {question.answers[lang].map(
@@ -83,28 +80,30 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
                             </>
                             :
                             <>
-                                {isAnswerCorrect(answers[currentQuestion])}
+                                <FadeIn delayTime={0}>
+                                    {isAnswerCorrect(answers[currentQuestion])}
+                                </FadeIn>
                                 <div className='font-bold text-2xl font-outline-1 text-nice-purple my-4 space-y-4'>
                                     <p>{question.question[lang]} </p>
-                                    <ResizeablePanel delayTime={0} durationTime={0.5}>
+                                    <ResizeablePanel delayTime={0.5} durationTime={1} >
                                         <div className='text-nice-greenMiddle text-2xl p-4 bg-nice-yellow rounded-lg border-t-4 border-l-4 border-black'>
                                             {question.answer[lang]}
                                         </div>
                                     </ResizeablePanel>
                                 </div>
-                                <FadeIn>
+                                <FadeIn delayTime={1}>
                                     <button className='button bg-nice-greenMiddle text-white w-1/2 mx-auto disabled:opacity-50 m-1 mt-4' onClick={() => nextQuestion()}>Next Question</button>
                                 </FadeIn>
                             </>
                         }
                     </div>
-                </ResizeablePanel>
-                :
-                <>
-                    good job g
-                    {/* ONLY SHOW ONCE COMPLETED */}
-                </>
-            }
+                    :
+                    <>
+                        good job g
+                        {/* ONLY SHOW ONCE COMPLETED */}
+                    </>
+                }
+            </ResizeablePanel>
         </div >
     )
 }
