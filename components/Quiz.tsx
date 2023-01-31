@@ -21,13 +21,12 @@ const Quiz = ({ questions, updateScore }: { questions: IQuestion[], updateScore:
     const [state, setState] = useState(initialState);
     let { currentQuestion, answers, selectedAnswer, numberOfQuestions } = state;
 
-
     const [showAnswer, setShowAnswer] = useState<boolean>(false)
     const question = questions[currentQuestion];
     numberOfQuestions = questions.length;
     let progress = Math.round(currentQuestion / numberOfQuestions * 100)
 
-    console.log("current question: ", currentQuestion, " number of questions: ", numberOfQuestions, "answers: ", answers);
+    // console.log("current question: ", currentQuestion, " number of questions: ", numberOfQuestions, "answers: ", answers);
 
     const checkAnswer = () => {
         setShowAnswer(true)
