@@ -27,9 +27,9 @@ const SignUp = () => {
         <>
             <Header />
             <div className="h-screen -mt-14 bg-nice-orange flex min-h-screen justify-center items-center">
-                <div className="bg-nice-green mx-2 w-full sm:w-4/5 md:w-3/4 lg:w-1/2 py-9 px-3 md:px-9 text-center rounded-xl border-b-8 border-r-8 border-blacks outline outline-1 outline-black flex flex-col">
+                <div className="bg-nice-green mx-2 w-full sm:w-4/5 md:w-3/4 lg:w-1/2 py-9 px-3 md:px-9 text-center rounded-xl border-b-8 border-r-8 border-blacks outline outline-1 outline-black flex flex-col ">
                     <div>
-                        <h2>Sign Up</h2>
+                        <h2 className="text-4xl font-bold text-nice-purple">Sign Up</h2>
                         <p>Enter your e-mail and password to sign up</p>
                     </div>
                     <div>
@@ -41,7 +41,7 @@ const SignUp = () => {
                             type="email"
                             name="email"
                             id="email"
-                            className="block w-full rounded-md border-nice-gray shadow-sm focus:border-nice-purple focus:ring-nice-purple focus:bg-nice-yellow sm:text-md"
+                            className="block w-4/5 m-auto rounded-md shadow-sm  focus:ring-nice-purple focus:ring-2 focus:bg-nice-yellow sm:text-md"
                             placeholder="you@example.com"
                         />
                     </div>
@@ -54,7 +54,7 @@ const SignUp = () => {
                             type="password"
                             name="password"
                             id="password"
-                            className="block w-full rounded-md border-nice-gray shadow-sm focus:border-nice-purple focus:ring-nice-purple focus:bg-nice-yellow sm:text-md"
+                            className="block w-4/5 m-auto rounded-md shadow-sm  focus:ring-nice-purple focus:ring-2 focus:bg-nice-yellow sm:text-md"
                             placeholder="password"
                         />
                     </div>
