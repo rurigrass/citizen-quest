@@ -8,6 +8,7 @@ import ScaleIn from './Motion/ScaleIn';
 
 const Quiz = ({ questions, updateScore }: { questions: IQuestion[], updateScore: any }) => {
     const { locale, locales } = useRouter();
+    const router = useRouter();
     const labels = ["A", "B", "C", "D", "E"];
     const lang = locale?.slice(0, 2) === "en" ? "en" : "es";
     const initialState: IQuiz = {
@@ -118,7 +119,7 @@ const Quiz = ({ questions, updateScore }: { questions: IQuestion[], updateScore:
                         Show score here
                         {answers.map((x, i) => <p key={i}>{x.toString()}</p>)}
                         {/* ONLY SHOW ONCE COMPLETED */}
-                        <button className='button bg-nice-greenMiddle text-white w-1/2 mx-auto disabled:opacity-50 m-1 mt-4'>Back to menu</button>
+                        <button className='button bg-nice-greenMiddle text-white w-1/2 mx-auto disabled:opacity-50 m-1 mt-4' onClick={() => router.reload()}>Back to menu</button>
                     </div>
                 }
             </ResizeablePanel>
