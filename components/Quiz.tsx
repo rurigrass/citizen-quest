@@ -6,7 +6,7 @@ import ResizeablePanel from './Motion/ResizeablePanel';
 import FadeIn from './Motion/FadeIn';
 import ScaleIn from './Motion/ScaleIn';
 
-const Quiz = ({ questions }: { questions: IQuestion[] }) => {
+const Quiz = ({ questions, updateScore }: { questions: IQuestion[], updateScore: any }) => {
     const { locale, locales } = useRouter();
     const labels = ["A", "B", "C", "D", "E"];
     const lang = locale?.slice(0, 2) === "en" ? "en" : "es";
@@ -19,10 +19,14 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
 
     const [state, setState] = useState(initialState);
     let { currentQuestion, answers, selectedAnswer, numberOfQuestions } = state;
+
+
     const [showAnswer, setShowAnswer] = useState<boolean>(false)
     const question = questions[currentQuestion];
     numberOfQuestions = questions.length;
     let progress = Math.round(currentQuestion / numberOfQuestions * 100)
+
+    console.log("current question: ", currentQuestion, " number of questions: ", numberOfQuestions, "answers: ", answers);
 
     const checkAnswer = () => {
         setShowAnswer(true)
@@ -49,6 +53,11 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
                     Incorrect
                 </h2>)}</>
         )
+    }
+
+    const finishQuiz = () => {
+        updateScore(answers)
+        nextQuestion()
     }
 
     return (
@@ -95,16 +104,22 @@ const Quiz = ({ questions }: { questions: IQuestion[] }) => {
                                     </ResizeablePanel>
                                 </div>
                                 <FadeIn delayTime={2.25}>
-                                    <button className='button bg-nice-greenMiddle text-white w-1/2 mx-auto disabled:opacity-50 m-1 mt-4' onClick={() => nextQuestion()}>Next Question</button>
+                                    {currentQuestion + 1 === numberOfQuestions ?
+                                        <button className='button bg-nice-greenMiddle text-white w-1/2 mx-auto disabled:opacity-50 m-1 mt-4' onClick={() => finishQuiz()}>Finish</button>
+                                        :
+                                        <button className='button bg-nice-greenMiddle text-white w-1/2 mx-auto disabled:opacity-50 m-1 mt-4' onClick={() => nextQuestion()}>Next Question</button>
+                                    }
                                 </FadeIn>
                             </>
                         }
                     </div>
                     :
-                    <>
-                        good job g
+                    <div className='flex flex-col'>
+                        Show score here
+                        {answers.map((x, i) => <p key={i}>{x.toString()}</p>)}
                         {/* ONLY SHOW ONCE COMPLETED */}
-                    </>
+                        <button className='button bg-nice-greenMiddle text-white w-1/2 mx-auto disabled:opacity-50 m-1 mt-4'>Back to menu</button>
+                    </div>
                 }
             </ResizeablePanel>
         </div >

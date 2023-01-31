@@ -28,6 +28,12 @@ export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [userId, setUserId] = useState<string | undefined>();
 
+
+  const updateScore = (score: string[]) => {
+    console.log("this is the score: ", score);
+  }
+
+
   //LOGIN STUFF
   useEffect(() => {
     const getUser = async () => {
@@ -81,6 +87,7 @@ export default function Home() {
               {quizQuestions &&
                 <Quiz
                   questions={quizQuestions}
+                  updateScore={updateScore}
                 />
               }
             </>
