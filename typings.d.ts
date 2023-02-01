@@ -1,4 +1,5 @@
 import React from "react"
+import internal from "stream"
 
 export interface IQuestion {
   id: bigint
@@ -19,6 +20,14 @@ export interface IQuestion {
   }
 }
 
+export interface IScore {
+  id: bigint
+  user_id: bigint
+  country: string
+  number_of_questions: number
+  score: number
+}
+
 export interface TAnswers {
   en: string
   es: string
@@ -28,8 +37,8 @@ export interface IState {
   showExercise: boolean,
   showGameSettings: boolean,
   quizQuestions: IQuestion[] | any[],
-  isExerciseDone: boolean,
   showLeaderboard: boolean
+  scores: IScore[] | any[]
 }
 
 export interface IQuiz {

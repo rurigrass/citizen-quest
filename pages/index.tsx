@@ -9,18 +9,19 @@ import { supabase } from '../lib/supabaseClient';
 import Quiz from '../components/Quiz';
 import Header from '../components/Header';
 import ResizeablePanel from '../components/Motion/ResizeablePanel';
+import Leaderboard from '../components/Leaderboard';
 
 export default function Home() {
   const initialState = {
     showExercise: false,
     showGameSettings: false,
     quizQuestions: [],
-    isExerciseDone: false,
-    showLeaderboard: false
+    showLeaderboard: false,
+    scores: [],
   };
 
   const [state, setState] = useState<IState>(initialState)
-  const { showExercise, showGameSettings, quizQuestions, isExerciseDone, showLeaderboard } = state;
+  const { showExercise, showGameSettings, quizQuestions, showLeaderboard, scores } = state;
   const { locale, locales } = useRouter()
   const lang = locale?.slice(0, 2) === "en" ? en : es;
   // const boxBackground = useColorModeValue("niceGreen", "niceBlue")
@@ -28,7 +29,7 @@ export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [userId, setUserId] = useState<string | undefined>();
 
-
+  //Push completed quiz data to Scores supabase table
   const updateScore = async (answers: string[]) => {
     try {
       if (userId && answers) {
@@ -74,6 +75,18 @@ export default function Home() {
     fetchQuestions()
   }, [])
 
+  // FETCH SCORES
+  useEffect(() => {
+    const fetchScores = async () => {
+      try {
+        const { data, error } = await supabase.from("scores").select()
+        if (error) throw error;
+        setState(state => ({ ...state, scores: data }))
+      } catch (error: any) { alert(error.message) }
+    };
+    fetchScores()
+  }, [])
+
   return (
     <>
       <Head>
@@ -98,7 +111,7 @@ export default function Home() {
               <ResizeablePanel delayTime={0.25}>
                 {showLeaderboard &&
                   <div className='bg-nice-orange p-5 rounded-lg border-t-4 border-l-4 border-black outline outline-1 outline-black'>
-                    table
+                    <Leaderboard scores={scores} />
                   </div>
                 }
               </ResizeablePanel>
