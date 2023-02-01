@@ -75,11 +75,11 @@ export default function Home() {
     fetchQuestions()
   }, [])
 
-  // FETCH SCORES
+  // FETCH SCORES FROM HIGHEST TO LOWEST
   useEffect(() => {
     const fetchScores = async () => {
       try {
-        const { data, error } = await supabase.from("scores").select()
+        const { data, error } = await supabase.from("scores").select().order('score', { ascending: false })
         if (error) throw error;
         setState(state => ({ ...state, scores: data }))
       } catch (error: any) { alert(error.message) }
