@@ -16,11 +16,10 @@ export default function Home() {
     showGameSettings: false,
     quizQuestions: [],
     isExerciseDone: false,
-    score: 0
   };
 
   const [state, setState] = useState<IState>(initialState)
-  const { showExercise, showGameSettings, quizQuestions, isExerciseDone, score } = state;
+  const { showExercise, showGameSettings, quizQuestions, isExerciseDone } = state;
   const { locale, locales } = useRouter()
   const lang = locale?.slice(0, 2) === "en" ? en : es;
   // const boxBackground = useColorModeValue("niceGreen", "niceBlue")
@@ -29,10 +28,24 @@ export default function Home() {
   const [userId, setUserId] = useState<string | undefined>();
 
 
-  const updateScore = (score: string[]) => {
-    console.log("this is the score: ", score);
-  }
-
+  const updateScore = async (answers: string[]) => {
+    try {
+      if (userId && answers) {
+        const [number_of_questions, score] = [answers.length, answers.filter(Boolean).length]
+        const { data, error } = await supabase.from("scores").insert({
+          user_id: userId,
+          country: "Spain",
+          number_of_questions: number_of_questions,
+          score: score
+        })
+        if (error) throw error;
+        console.log("answers submitted: ", answers);
+        console.log("pushed data: ", data);
+      }
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
 
   //LOGIN STUFF
   useEffect(() => {
@@ -88,6 +101,7 @@ export default function Home() {
                 <Quiz
                   questions={quizQuestions}
                   updateScore={updateScore}
+                  isAuthenticated={isAuthenticated}
                 />
               }
             </>

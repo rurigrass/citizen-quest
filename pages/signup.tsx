@@ -31,7 +31,7 @@ const SignUp = () => {
             <Header />
             <div className="bg-nice-orange -mt-14">
                 <div className="flex items-center justify-center min-h-screen">
-                    <div className="px-8 py-6 mt-4 text-left bg-nice-green shadow-lg border-b-8 border-r-8 outline outline-1 rounded-xl">
+                    <div className="px-8 py-6 mt-4 bg-nice-green border-b-8 border-r-8 outline outline-1 rounded-xl">
                         <h3 className="text-3xl font-bold text-center text-nice-purple">Sign Up</h3>
                         {/* <p>Enter your e-mail and password to sign up</p> */}
                         <div>
@@ -57,12 +57,14 @@ const SignUp = () => {
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                             </div>
-                            <div className="mt-4 flex items-baseline justify-between space-x-2">
-                                <button
-                                    className="button bg-nice-greenMiddle text-white mx-auto disabled:opacity-50 hover:ml-0.5"
-                                    onClick={signUpWithEmail}
-                                >Sign Up</button>
-                                <a href="#" className="text-sm hover:underline">Forgot password?</a>
+                            <div className="mt-4 grid justify-items-end">
+                                <div>
+                                    <button
+                                        className="button bg-nice-greenMiddle text-white mx-auto disabled:opacity-50 hover:ml-1"
+                                        onClick={signUpWithEmail}
+                                    >Sign Up</button>
+                                </div>
+                                {/* <a href="#" className="text-sm hover:underline">Forgot password?</a> */}
                             </div>
                         </div>
                     </div>

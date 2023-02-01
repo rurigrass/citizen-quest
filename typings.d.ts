@@ -29,7 +29,6 @@ export interface IState {
   showGameSettings: boolean,
   quizQuestions: IQuestion[] | any[],
   isExerciseDone: boolean,
-  score: number
 }
 
 export interface IQuiz {

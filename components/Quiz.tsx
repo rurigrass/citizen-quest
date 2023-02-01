@@ -6,7 +6,7 @@ import ResizeablePanel from './Motion/ResizeablePanel';
 import FadeIn from './Motion/FadeIn';
 import ScaleIn from './Motion/ScaleIn';
 
-const Quiz = ({ questions, updateScore }: { questions: IQuestion[], updateScore: any }) => {
+const Quiz = ({ questions, isAuthenticated, updateScore }: { questions: IQuestion[], isAuthenticated: boolean, updateScore: any }) => {
     const { locale, locales } = useRouter();
     const router = useRouter();
     const labels = ["A", "B", "C", "D", "E"];
@@ -18,8 +18,11 @@ const Quiz = ({ questions, updateScore }: { questions: IQuestion[], updateScore:
         numberOfQuestions: 0,
     };
 
+
+
     const [state, setState] = useState(initialState);
     let { currentQuestion, answers, selectedAnswer, numberOfQuestions } = state;
+    // console.log("stringafied", JSON.stringify(answers)); MAY NEED TO CONVERT ARRAY TO JSON
 
     const [showAnswer, setShowAnswer] = useState<boolean>(false)
     const question = questions[currentQuestion];
@@ -56,7 +59,7 @@ const Quiz = ({ questions, updateScore }: { questions: IQuestion[], updateScore:
     }
 
     const finishQuiz = () => {
-        updateScore(answers)
+        isAuthenticated && updateScore(answers);
         nextQuestion()
     }
 
