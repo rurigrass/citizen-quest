@@ -29,6 +29,7 @@ export interface IState {
   showGameSettings: boolean,
   quizQuestions: IQuestion[] | any[],
   isExerciseDone: boolean,
+  showLeaderboard: boolean
 }
 
 export interface IQuiz {

@@ -16,10 +16,11 @@ export default function Home() {
     showGameSettings: false,
     quizQuestions: [],
     isExerciseDone: false,
+    showLeaderboard: false
   };
 
   const [state, setState] = useState<IState>(initialState)
-  const { showExercise, showGameSettings, quizQuestions, isExerciseDone } = state;
+  const { showExercise, showGameSettings, quizQuestions, isExerciseDone, showLeaderboard } = state;
   const { locale, locales } = useRouter()
   const lang = locale?.slice(0, 2) === "en" ? en : es;
   // const boxBackground = useColorModeValue("niceGreen", "niceBlue")
@@ -93,7 +94,14 @@ export default function Home() {
                   </div>
                 }
               </ResizeablePanel>
-              <button className='button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1'>Leaderboard</button>
+              <button className='button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1' onClick={() => setState({ ...state, showLeaderboard: !showLeaderboard })}>Leaderboard</button>
+              <ResizeablePanel delayTime={0.25}>
+                {showLeaderboard &&
+                  <div className='bg-nice-orange p-5 rounded-lg border-t-4 border-l-4 border-black outline outline-1 outline-black'>
+                    table
+                  </div>
+                }
+              </ResizeablePanel>
             </>
           ) : (
             <>
