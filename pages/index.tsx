@@ -10,7 +10,6 @@ import Quiz from '../components/Quiz';
 import Header from '../components/Header';
 import ResizeablePanel from '../components/Motion/ResizeablePanel';
 import Leaderboard from '../components/Leaderboard';
-import { AnimatePresence } from 'framer-motion';
 
 export default function Home() {
   const initialState = {
@@ -29,28 +28,12 @@ export default function Home() {
   // const mainBackground = useColorModeValue("niceOrange", "nicePurple")
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [userId, setUserId] = useState<string | undefined>();
+  const [userName, setUserName] = useState<string | undefined>();
 
-  //Push completed quiz data to Scores supabase table
-  const updateScore = async (answers: string[]) => {
-    try {
-      if (userId && answers) {
-        const [number_of_questions, score] = [answers.length, answers.filter(Boolean).length]
-        const { data, error } = await supabase.from("scores").insert({
-          user_id: userId,
-          country: "Spain",
-          number_of_questions: number_of_questions,
-          score: score
-        })
-        if (error) throw error;
-        console.log("answers submitted: ", answers);
-        console.log("pushed data: ", data);
-      }
-    } catch (error) {
-      console.log("error: ", error);
-    }
-  };
+  console.log(isAuthenticated);
 
-  //LOGIN STUFF
+
+  //FETCH USER
   useEffect(() => {
     const getUser = async () => {
       const user = await supabase.auth.getUser();
@@ -58,10 +41,13 @@ export default function Home() {
         const userId = user.data.user?.id;
         setIsAuthenticated(true);
         setUserId(userId);
+        const { data } = await supabase.from("users").select("username").match({ id: userId })
+        if (data) {
+          setUserName(data[0].username)
+        }
       }
     };
     getUser();
-    // console.log("user id: ", userId);
   }, [userId]);
 
   //FETCH THE QUESTIONS
@@ -87,6 +73,27 @@ export default function Home() {
     };
     fetchScores()
   }, [])
+
+  //Push completed quiz data to Scores supabase table
+  const updateScore = async (answers: string[]) => {
+    try {
+      if (userId && answers) {
+        const [number_of_questions, score] = [answers.length, answers.filter(Boolean).length]
+        const { data, error } = await supabase.from("scores").insert({
+          user_id: userId,
+          username: userName,
+          country: "spain",
+          number_of_questions: number_of_questions,
+          score: score
+        })
+        if (error) throw error;
+        console.log("answers submitted: ", answers);
+        console.log("pushed data: ", data);
+      }
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
 
   return (
     <>

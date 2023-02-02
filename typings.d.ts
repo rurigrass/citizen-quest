@@ -23,6 +23,7 @@ export interface IQuestion {
 export interface IScore {
   id: bigint
   user_id: bigint
+  username: string
   country: string
   number_of_questions: number
   score: number

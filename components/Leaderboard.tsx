@@ -1,8 +1,9 @@
+import { useEffect } from "react"
+import { supabase } from "../lib/supabaseClient"
 import { IScore } from "../typings"
 
 const Leaderboard = ({ scores }: { scores: IScore[] }) => {
-    console.log(scores);
-    // const orderedScores = scores.sort((a, b) => )
+
 
     return (
         <div>
@@ -18,7 +19,7 @@ const Leaderboard = ({ scores }: { scores: IScore[] }) => {
                     {scores.map((score, i) =>
                     (<tr key={i + 1}>
                         <th>{i + 1}</th>
-                        <td>username</td>
+                        <td>{score.username}</td>
                         <td>{score.score}</td>
                     </tr>)
                     )}
