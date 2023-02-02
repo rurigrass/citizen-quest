@@ -30,15 +30,27 @@ export default function Home() {
   const [userId, setUserId] = useState<string | undefined>();
   const [userName, setUserName] = useState<string | undefined>();
 
-  console.log(isAuthenticated);
+  console.log("userID: ", userId);
+  console.log("is auth: ", isAuthenticated);
 
+  //SIGN OUT
+  const signOut = async () => {
+    try {
+      const { error } = await supabase.auth.signOut()
+      setIsAuthenticated(false)
+      if (error) throw error
+    } catch (error) {
+      console.log(error);
+
+    }
+  }
 
   //FETCH USER
   useEffect(() => {
     const getUser = async () => {
       const user = await supabase.auth.getUser();
-      if (user) {
-        const userId = user.data.user?.id;
+      const userId = user.data.user?.id;
+      if (userId) {
         setIsAuthenticated(true);
         setUserId(userId);
         const { data } = await supabase.from("users").select("username").match({ id: userId })
@@ -100,7 +112,7 @@ export default function Home() {
       <Head>
         <title>Citizen Quest</title>
       </Head>
-      <Header />
+      <Header isAuth={isAuthenticated} signOut={signOut} />
       <div className='h-screen -mt-14 bg-nice-orange flex min-h-screen justify-center items-center'>
         <div className='bg-nice-green mx-2 w-full sm:w-4/5 md:w-3/4 lg:w-1/2 py-9 px-3 md:px-9 text-center rounded-xl border-b-8 border-r-8 border-blacks outline outline-1 outline-black flex flex-col'>
           {!showExercise ? (
