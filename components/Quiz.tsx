@@ -16,12 +16,13 @@ const Quiz = ({ questions, isAuthenticated, updateScore }: { questions: IQuestio
         answers: [],
         selectedAnswer: "",
         numberOfQuestions: 0,
+        showQuestion: true
     };
 
 
 
     const [state, setState] = useState(initialState);
-    let { currentQuestion, answers, selectedAnswer, numberOfQuestions } = state;
+    let { currentQuestion, answers, selectedAnswer, numberOfQuestions, showQuestion } = state;
     // console.log("stringafied", JSON.stringify(answers)); MAY NEED TO CONVERT ARRAY TO JSON
 
     const [showAnswer, setShowAnswer] = useState<boolean>(false)

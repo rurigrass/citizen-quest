@@ -45,5 +45,6 @@ export interface IQuiz {
   currentQuestion: number,
   answers: boolean[],
   numberOfQuestions: number,
-  selectedAnswer: string
+  selectedAnswer: string,
+  showQuestion: boolean
 }

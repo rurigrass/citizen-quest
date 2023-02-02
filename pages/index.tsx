@@ -10,6 +10,7 @@ import Quiz from '../components/Quiz';
 import Header from '../components/Header';
 import ResizeablePanel from '../components/Motion/ResizeablePanel';
 import Leaderboard from '../components/Leaderboard';
+import { AnimatePresence } from 'framer-motion';
 
 export default function Home() {
   const initialState = {
@@ -99,21 +100,21 @@ export default function Home() {
             <>
               <h1 className='font-bold text-4xl text-nice-purple mb-7'>{lang.menu.title}</h1>
               <button className='button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1 disabled:opacity-50' disabled={showGameSettings === true} onClick={() => setState({ ...state, showGameSettings: !showGameSettings })}>New Game</button>
-              <ResizeablePanel delayTime={0.25}>
-                {showGameSettings &&
-                  <div className='bg-nice-orange p-5 rounded-lg border-t-4 border-l-4 border-black outline outline-1 outline-black'>
-                    {/* setting sliders go here */}
-                    <button className='button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1' onClick={() => setState({ ...state, showExercise: true })}>Start Game</button>
-                  </div>
-                }
+              <ResizeablePanel isVisible={showGameSettings} delayTime={0.25}>
+
+                <div className='bg-nice-orange p-5 rounded-lg border-t-4 border-l-4 border-black outline outline-1 outline-black'>
+                  {/* setting sliders go here */}
+                  <button className='button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1' onClick={() => setState({ ...state, showExercise: true })}>Start Game</button>
+                </div>
+
               </ResizeablePanel>
               <button className='button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1' onClick={() => setState({ ...state, showLeaderboard: !showLeaderboard })}>Leaderboard</button>
-              <ResizeablePanel delayTime={0.25}>
-                {showLeaderboard &&
-                  <div className='bg-nice-orange p-5 rounded-lg border-t-4 border-l-4 border-black outline outline-1 outline-black'>
-                    <Leaderboard scores={scores} />
-                  </div>
-                }
+              <ResizeablePanel isVisible={showLeaderboard} delayTime={0.25} >
+
+                <div className='bg-nice-orange p-5 rounded-lg border-t-4 border-l-4 border-black outline outline-1 outline-black'>
+                  <Leaderboard scores={scores} />
+                </div>
+
               </ResizeablePanel>
             </>
           ) : (
