@@ -15,12 +15,12 @@ const Header = ({ isAuth = false, signOut = null }: { isAuth?: boolean, signOut?
                 </Link>
             </div>
             <div className="flex items-center text-green-green">
-                <ToggleLanguage locales={locales} />
                 {isAuth ?
                     <button className="button bg-nice-yellow hover:bg-nice-blue hover:text-white m-1 py-1 hover:ml-1.5" onClick={signOut}>Sign out</button>
                     :
                     <button className="button bg-nice-yellow hover:bg-nice-blue hover:text-white m-1 py-1 hover:ml-1.5" onClick={() => router.push("/login")}>Login</button>
                 }
+                <ToggleLanguage locales={locales} />
             </div>
         </header >
     )

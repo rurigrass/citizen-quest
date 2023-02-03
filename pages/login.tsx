@@ -54,11 +54,14 @@ const Login = () => {
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                             </div>
-                            <div className="mt-4 flex items-baseline justify-between space-x-2">
+                            <div className="mt-4 text-center">
                                 <button
-                                    className="button bg-nice-greenMiddle text-white mx-auto disabled:opacity-50 hover:ml-1.5"
+                                    className="button bg-nice-greenMiddle text-white mx-auto disabled:opacity-50 hover:ml-1"
                                     onClick={signInWithEmail}
                                 >Login</button>
+                            </div>
+                            <div className="mt-4 flex items-baseline justify-between space-x-2">
+                                <a href="#" className="text-sm hover:underline hover:text-nice-blue" onClick={() => router.push("/signup")}>Sign Up</a>
                                 <a href="#" className="text-sm hover:underline">Forgot password?</a>
                             </div>
                         </div>
