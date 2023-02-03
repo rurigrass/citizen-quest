@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import Head from 'next/head'
 // import ToggleColorMode from '../components/ToggleColorMode';
 import en from '../content/en';
@@ -10,6 +10,8 @@ import Quiz from '../components/Quiz';
 import Header from '../components/Header';
 import ResizeablePanel from '../components/Motion/ResizeablePanel';
 import Leaderboard from '../components/Leaderboard';
+import { useSession, useUser } from '@supabase/auth-helpers-react';
+import Login from './login';
 
 export default function Home() {
   const initialState = {
@@ -29,40 +31,9 @@ export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [userId, setUserId] = useState<string | undefined>();
   const [userName, setUserName] = useState<string | undefined>();
+  const user = useUser()
 
-  console.log("userID: ", userId);
-  console.log("is auth: ", isAuthenticated);
-
-  //SIGN OUT
-  const signOut = async () => {
-    try {
-      const { error } = await supabase.auth.signOut()
-      setIsAuthenticated(false)
-      if (error) throw error
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  //FETCH USER
-  // useEffect(() => {
-  //   const getUser = async () => {
-  //     const { data: { user }, error } = await supabase.auth.getUser();
-  //     if (error) throw error
-  //     const userId = user?.id;
-  //     console.log(userId);
-  //     if (userId) {
-  //       setIsAuthenticated(true);
-  //       setUserId(userId);
-  //       const { data, error } = await supabase.from("users").select("username").match({ id: userId })
-  //       if (error) throw error
-  //       if (data) {
-  //         setUserName(data[0].username)
-  //       }
-  //     }
-  //   };
-  //   getUser();
-  // }, [userId]);
+  console.log("USERID", userId);
 
   useEffect(() => {
     const getUser = async () => {
@@ -131,6 +102,24 @@ export default function Home() {
     }
   };
 
+
+  console.log("USERIDODOO", user);
+
+  if (!user) {
+    return <Login />
+  }
+
+  //SIGN OUT
+  const signOut = async () => {
+    try {
+      const { error } = await supabase.auth.signOut()
+      setIsAuthenticated(false)
+      if (error) throw error
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
       <Head>
@@ -142,7 +131,7 @@ export default function Home() {
           {!showExercise ? (
             <>
               <h1 className='font-bold text-4xl text-nice-purple mb-7'>{lang.menu.title}</h1>
-              <button className='button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1 disabled:opacity-50' disabled={showGameSettings === true} onClick={() => setState({ ...state, showGameSettings: !showGameSettings })}>New Game</button>
+              <button className={showGameSettings ? 'button-pressed bg-nice-blue text-white m-1 font-bold' : 'button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1 hover:font-bold'} onClick={() => setState({ ...state, showGameSettings: !showGameSettings })}>New Game</button>
               <ResizeablePanel isVisible={showGameSettings} delayTime={0.25}>
 
                 <div className='bg-nice-orange p-5 rounded-lg border-t-4 border-l-4 border-black outline outline-1 outline-black'>
@@ -151,7 +140,7 @@ export default function Home() {
                 </div>
 
               </ResizeablePanel>
-              <button className={showLeaderboard ? 'button-pressed bg-nice-blue text-white m-1' : 'button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1'} onClick={() => setState({ ...state, showLeaderboard: !showLeaderboard })}>Leaderboard</button>
+              <button className={showLeaderboard ? 'button-pressed bg-nice-blue text-white m-1 font-bold' : 'button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1 hover:font-bold'} onClick={() => setState({ ...state, showLeaderboard: !showLeaderboard })}>Leaderboard</button>
               <ResizeablePanel isVisible={showLeaderboard} delayTime={0.25} >
                 <div className='bg-nice-orange p-5 rounded-lg border-t-4 border-l-4 border-black outline outline-1 outline-black'>
                   <Leaderboard scores={scores} />
