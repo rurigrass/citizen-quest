@@ -45,21 +45,46 @@ export default function Home() {
   }
 
   //FETCH USER
+  // useEffect(() => {
+  //   const getUser = async () => {
+  //     const { data: { user }, error } = await supabase.auth.getUser();
+  //     if (error) throw error
+  //     const userId = user?.id;
+  //     console.log(userId);
+  //     if (userId) {
+  //       setIsAuthenticated(true);
+  //       setUserId(userId);
+  //       const { data, error } = await supabase.from("users").select("username").match({ id: userId })
+  //       if (error) throw error
+  //       if (data) {
+  //         setUserName(data[0].username)
+  //       }
+  //     }
+  //   };
+  //   getUser();
+  // }, [userId]);
+
   useEffect(() => {
     const getUser = async () => {
-      const user = await supabase.auth.getUser();
-      const userId = user.data.user?.id;
-      if (userId) {
-        setIsAuthenticated(true);
-        setUserId(userId);
-        const { data } = await supabase.from("users").select("username").match({ id: userId })
-        if (data) {
-          setUserName(data[0].username)
+      try {
+        const { data: { user }, error } = await supabase.auth.getUser();
+        if (error) throw error;
+        if (user) {
+          const userId = user.id;
+          setIsAuthenticated(true);
+          setUserId(userId);
+          const { data, error } = await supabase.from("users").select("username").match({ id: userId })
+          if (error) throw error
+          if (data) {
+            setUserName(data[0].username)
+          }
         }
+      } catch (error) {
+        console.log("error: ", error);
       }
-    };
-    getUser();
-  }, [userId]);
+    }
+    getUser()
+  }, [])
 
   //FETCH THE QUESTIONS
   useEffect(() => {
@@ -126,13 +151,11 @@ export default function Home() {
                 </div>
 
               </ResizeablePanel>
-              <button className='button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1' onClick={() => setState({ ...state, showLeaderboard: !showLeaderboard })}>Leaderboard</button>
+              <button className={showLeaderboard ? 'button-pressed bg-nice-blue text-white m-1' : 'button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1'} onClick={() => setState({ ...state, showLeaderboard: !showLeaderboard })}>Leaderboard</button>
               <ResizeablePanel isVisible={showLeaderboard} delayTime={0.25} >
-
                 <div className='bg-nice-orange p-5 rounded-lg border-t-4 border-l-4 border-black outline outline-1 outline-black'>
                   <Leaderboard scores={scores} />
                 </div>
-
               </ResizeablePanel>
             </>
           ) : (

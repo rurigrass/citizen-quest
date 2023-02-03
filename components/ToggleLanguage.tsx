@@ -37,7 +37,7 @@ const ToggleLanguage = ({ locales }: { locales: string[] | undefined }) => {
 
     return (
         <div>
-            <button className={dropdownOpen ? 'button-pressed bg-nice-blue text-white m-1 py-1' : 'button bg-nice-yellow hover:bg-nice-blue hover:text-white m-1 py-1 hover:ml-1.5'}
+            <button className={dropdownOpen ? 'button-pressed bg-nice-blue text-white m-1 py-1 ml-2' : 'button bg-nice-yellow hover:bg-nice-blue hover:text-white m-1 py-1 hover:ml-1.5'}
                 onClick={() => (dropdownOpen ? closeDropdown() : openDropdown())}>
                 {locale?.substring(0, 2)}
             </button>
