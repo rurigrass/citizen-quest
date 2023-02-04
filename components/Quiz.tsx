@@ -65,19 +65,21 @@ const Quiz = ({ questions, isAuthenticated, updateScore }: { questions: IQuestio
     }
 
     return (
-        <div className='relative'>
-            {progress >= 0 &&
-                <div
-                    className='absolute -top-16 left-0 right-0 mx-auto w-3/4 bg-nice-yellow h-4 rounded-full outline outline-1 outline-black border-b-4 border-r-4'>
-                    <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: `${progress}%` }}
-                        transition={{ duration: 0.5, delay: 0.1 }}
-                        className="relative bg-nice-purple h-3 transition rounded-xl" >
-                        <div className='absolute w-1/3 bg-white opacity-20 h-1 right-2 top-0.5 rounded-full' />
-                    </motion.div>
-                </div>
-            }
+        <>
+            <div className='relative'>
+                {progress >= 0 &&
+                    <div
+                        className=' absolute bottom-16 left-0 right-0 mx-auto w-3/4 bg-nice-yellow h-4 rounded-full outline outline-1 outline-black border-b-4 border-r-4'>
+                        <motion.div
+                            initial={{ width: 0 }}
+                            animate={{ width: `${progress}%` }}
+                            transition={{ duration: 0.5, delay: 0.1 }}
+                            className="relative bg-nice-purple h-3 transition rounded-xl" >
+                            <div className='absolute w-1/3 bg-white opacity-20 h-1 right-2 top-0.5 rounded-full' />
+                        </motion.div>
+                    </div>
+                }
+            </div>
             <ResizeablePanel delayTime={0}>
                 {question !== undefined ?
                     <div className=' flex flex-col'>
@@ -126,7 +128,7 @@ const Quiz = ({ questions, isAuthenticated, updateScore }: { questions: IQuestio
                     </div>
                 }
             </ResizeablePanel>
-        </div >
+        </>
     )
 }
 
