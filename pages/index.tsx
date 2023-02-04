@@ -35,6 +35,9 @@ export default function Home() {
   const user = useUser()
   const session = useSession()
 
+  console.log(user);
+
+
   useEffect(() => {
     const getUser = async () => {
       if (user) {
