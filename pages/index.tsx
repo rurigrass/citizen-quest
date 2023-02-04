@@ -11,6 +11,7 @@ import Quiz from '../components/Quiz';
 import Header from '../components/Header';
 import ResizeablePanel from '../components/Motion/ResizeablePanel';
 import Leaderboard from '../components/Leaderboard';
+import Login from './login';
 // import Login from './login';
 
 export default function Home() {
@@ -34,31 +35,21 @@ export default function Home() {
   const user = useUser()
   const session = useSession()
 
-  console.log("USERID", userId);
-
   useEffect(() => {
     const getUser = async () => {
-      try {
-        const { data: { user }, error } = await supabase.auth.getUser();
-        console.log("DAAA@wasssuuuppp", user);
-
-        if (error) throw error;
-        if (user) {
-          const userId = user.id;
-          setIsAuthenticated(true);
-          setUserId(userId);
-          const { data, error } = await supabase.from("users").select("username").match({ id: userId })
-          if (error) throw error
-          if (data) {
-            setUserName(data[0].username)
-          }
+      if (user) {
+        const userId = user.id;
+        setIsAuthenticated(true);
+        setUserId(userId)
+        const { data, error } = await supabase.from("users").select("username").match({ id: userId })
+        if (error) throw error
+        if (data) {
+          setUserName(data[0].username)
         }
-      } catch (error) {
-        console.log("error: ", error);
       }
     }
     getUser()
-  }, [])
+  }, [user])
 
   //FETCH THE QUESTIONS
   useEffect(() => {
@@ -105,13 +96,9 @@ export default function Home() {
     }
   };
 
-
-  console.log("USERIDODOO", user);
-  console.log("SESSION", session);
-
-  // if (!session) {
-  //   return <Login />
-  // }
+  if (!session) {
+    return <Login />
+  }
 
   //SIGN OUT
   const signOut = async () => {
