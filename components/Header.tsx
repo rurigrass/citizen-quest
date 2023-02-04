@@ -1,11 +1,11 @@
 import Link from "next/link"
 import Router, { useRouter } from "next/router"
-import { supabase } from "../lib/supabaseClient";
 import ToggleLanguage from "./ToggleLanguage"
 
 const Header = ({ isAuth = false, signOut = null }: { isAuth?: boolean, signOut?: any }) => {
     const router = useRouter();
     const { locale, locales } = useRouter()
+
 
     return (
         <header className="flex justify-between px-5 py-2 h-14 bg-nice-purple sticky border-b-2 border-b-black">

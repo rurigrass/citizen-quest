@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import Router, { useRouter } from 'next/router';
 import Head from 'next/head'
+import { supabase } from '../lib/supabaseClient';
+import { useSession, useUser } from '@supabase/auth-helpers-react';
 // import ToggleColorMode from '../components/ToggleColorMode';
 import en from '../content/en';
 import es from '../content/es';
 import { IState } from '../typings';
-import { supabase } from '../lib/supabaseClient';
 import Quiz from '../components/Quiz';
 import Header from '../components/Header';
 import ResizeablePanel from '../components/Motion/ResizeablePanel';
 import Leaderboard from '../components/Leaderboard';
-import { useSession, useUser } from '@supabase/auth-helpers-react';
-import Login from './login';
+// import Login from './login';
 
 export default function Home() {
   const initialState = {
@@ -32,6 +32,7 @@ export default function Home() {
   const [userId, setUserId] = useState<string | undefined>();
   const [userName, setUserName] = useState<string | undefined>();
   const user = useUser()
+  const session = useSession()
 
   console.log("USERID", userId);
 
@@ -39,6 +40,8 @@ export default function Home() {
     const getUser = async () => {
       try {
         const { data: { user }, error } = await supabase.auth.getUser();
+        console.log("DAAA@wasssuuuppp", user);
+
         if (error) throw error;
         if (user) {
           const userId = user.id;
@@ -104,10 +107,11 @@ export default function Home() {
 
 
   console.log("USERIDODOO", user);
+  console.log("SESSION", session);
 
-  if (!user) {
-    return <Login />
-  }
+  // if (!session) {
+  //   return <Login />
+  // }
 
   //SIGN OUT
   const signOut = async () => {
