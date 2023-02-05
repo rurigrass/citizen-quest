@@ -69,7 +69,7 @@ const Quiz = ({ questions, isAuthenticated, updateScore }: { questions: IQuestio
             <div className='relative'>
                 {progress >= 0 &&
                     <div
-                        className=' absolute bottom-16 left-0 right-0 mx-auto w-3/4 bg-nice-yellow h-4 rounded-full outline outline-1 outline-black border-b-4 border-r-4'>
+                        className='absolute bottom-16 left-0 right-0 mx-auto w-3/4 bg-nice-yellow h-4 rounded-full outline outline-1 outline-black border-b-4 border-r-4'>
                         <motion.div
                             initial={{ width: 0 }}
                             animate={{ width: `${progress}%` }}
