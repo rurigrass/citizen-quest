@@ -125,7 +125,7 @@ export default function Home() {
           {!showExercise ? (
             <>
               <h1 className='font-bold text-4xl text-nice-purple mb-7'>{lang.menu.title}</h1>
-              <button className={showGameSettings ? 'button-pressed bg-nice-blue text-white m-1 font-bold' : 'transition ease-in-out p-2 px-4 rounded-lg border-b-4 border-r-4 hover:border-b-2 hover:mb-1.5 hover:border-r-2 border-black shadow-lg hover:shadow-sm  outline outline-1 outline-black font-medium bg-nice-yellow hover:bg-nice-purple hover:text-white m-1 hover:font-bold'} onClick={() => setState({ ...state, showGameSettings: !showGameSettings })}>New Game</button>
+              <button className={showGameSettings ? 'button-pressed bg-nice-blue text-white m-1 font-bold' : 'button bg-nice-yellow hover:bg-nice-purple hover:text-white m-1 hover:font-bold'} onClick={() => setState({ ...state, showGameSettings: !showGameSettings })}>New Game</button>
               <ResizeablePanel isVisible={showGameSettings} delayTime={0.25}>
 
                 <div className='bg-nice-orange p-5 rounded-lg border-t-4 border-l-4 border-black outline outline-1 outline-black'>
