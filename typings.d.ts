@@ -1,6 +1,3 @@
-import React from "react"
-import internal from "stream"
-
 export interface IQuestion {
   id: bigint
   country: string
